@@ -27,13 +27,12 @@ Routes.prototype.init = function(){
 	var self = this;
 	
 	self.app.get('/list', function (req, res) {
-	    console.log("----> List Users <-----")
 		self.crud.list(req, function(response){
             res.json(response);
         })
 	});
 
-	self.app.post('/insert',function(req,res){
+	self.app.post('/add',function(req,res){
         self.crud.insert(req, function(response){
             res.json(response);
         })

@@ -27,13 +27,14 @@ app.use(bodyParser());
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
-/*
-app.use(fileUpload());
+
+//app.use(fileUpload());
 
 //For Static Files
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(__dirname + '/webapps'));
-app.use(layout());*/
+//app.use("/", express.static(__dirname));
+//app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(__dirname + '/views'));
+//app.use(layout());
 
 
 var MemoryStore = session.MemoryStore;
@@ -79,7 +80,6 @@ mongoClient.connect(function(dbconn){
 
     app.dbconn = dbconn;
     app.conf = conf;
-    console.log(response)
     app.resp = response;
 //    app.socket = new SocketIO(io,app);
     /*app.get('/', function (req, res) {
