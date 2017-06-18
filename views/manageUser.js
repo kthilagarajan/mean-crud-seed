@@ -10,6 +10,13 @@ function userController($scope,$http){
         $http.get(apiBase+"/list").then(function (response) {
             console.log(response.data)
             vm.listUsers = response.data
+            /*setTimeout(function(){
+                $('#userTable').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": apiBase+"/sort"
+                });
+            },1000)*/
         })
     }
     $scope.listUser()

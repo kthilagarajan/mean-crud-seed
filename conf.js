@@ -9,7 +9,7 @@ var conf = {
         mongodb: {
             host: "localhost",
             port: 27017,
-            dbname: 'userdb',
+            dbname: 'usersdb',
             username: "",
             password: ""
         }
