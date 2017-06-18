@@ -2,27 +2,41 @@ var app = angular.module("user",[])
 var apiBase = "http://localhost:8080"
 app.controller("userController", userController)
 
-function userController($scope){
+function userController($scope,$http){
     var vm = this;
     vm.appTitle = "User Management Portal"
 
     $scope.listUser = function(){
         $http.get(apiBase+"/list").then(function (response) {
-            vm.listUsers = response
+            console.log(response.data)
+            vm.listUsers = response.data
         })
     }
+    $scope.listUser()
 
     $scope.addUser = function(){
         $http.post(apiBase+"/add",vm.userObj).then(function (response) {
-            vm.listUsers = response
+            if(response.status){
+                $scope.listUser()
+            }
+            vm.userObj = {}
         })
     }
 
-    $scope.updateUser = function(){
-
+    $scope.updateUser = function(id){
+        $http.post(apiBase+"/find?id="+id).then(function (response) {
+            if(response.status){
+                vm.userObj = response.data
+            }
+        })
     }
 
-    $scope.deleteUser = function(){
-
+    $scope.deleteUser = function(id){
+        console.log(id)
+        $http.post(apiBase+"/delete?id="+id).then(function (response) {
+            if(response.status){
+                $scope.listUser()
+            }
+        })
     }
 }

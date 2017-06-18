@@ -23,19 +23,19 @@
                 <td>{{listObj.age}}</td>
                 <td>{{listObj.city}}</td>
                 <td style="width: 30%;">
-                    <button class="btn btn-warning" ng-click="updateUser(listObj.id)">Edit</button>
-                    <button class="btn btn-danger" ng-click="deleteUser(listObj.id)">Delete</button>
+                    <button class="btn btn-warning" ng-click="updateUser(listObj._id)">Edit</button>
+                    <button class="btn btn-danger" ng-click="deleteUser(listObj._id)">Delete</button>
                 </td>
             </tr>
             <tr ng-init="vm.userObj">
                 <td>
-                    <input ng-model="vm.userObj.name" type="text" placeholder="Name" />
+                    <input class="form-control" ng-model="vm.userObj.name" type="text" placeholder="Name" />
                 </td>
                 <td>
-                    <input ng-model="vm.userObj.age" type="text" placeholder="Age" />
+                    <input class="form-control" ng-model="vm.userObj.age" type="text" placeholder="Age" />
                 </td>
                 <td>
-                    <input ng-model="vm.userObj.city" type="text" placeholder="City" />
+                    <input class="form-control" ng-model="vm.userObj.city" type="text" placeholder="City" />
                 </td>
                 <td style="width: 30%;">
                     <button class="btn btn-warning" ng-click="addUser()">Add</button>

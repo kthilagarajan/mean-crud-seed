@@ -28,26 +28,26 @@ Routes.prototype.init = function(){
 	
 	self.app.get('/list', function (req, res) {
 		self.crud.list(req, function(response){
-            res.json(response);
+            res.json(response.data);
         })
 	});
 
 	self.app.post('/add',function(req,res){
         self.crud.insert(req, function(response){
-            res.json(response);
+            res.json(response.data);
         })
     });
 
-    /*self.app.post('/update',function(req,res){
-        self.authentication.createUser(req, function(response){
-            res.json(response);
+    self.app.post('/find',function(req,res){
+        self.crud.find(req, function(response){
+            res.json(response.data);
         })
     });
     self.app.post('/delete',function(req,res){
-        self.users.activeUsers(req, function(response){
-            res.json(response);
+        self.crud.delete(req, function(response){
+            res.json(response.data);
         })
-    });*/
+    });
 };
 
 
