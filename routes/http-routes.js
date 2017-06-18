@@ -1,15 +1,13 @@
-var Authentication = require('./actions/authentication');
-var Users = require("../routes/actions/users")
+var crud = require('./actions/crud');
 
 
 var fs = require("fs");
 
 var Routes = function(app){
 	this.app = app;
-	this.authentication = new Authentication(app);
-    this.users = new Users(app)
+	this.crud = new crud(app);
 	this.init();
-};
+}
 module.exports = Routes;
 
 var sessionCheck = function(req, res, next){
@@ -28,32 +26,29 @@ var sessionCheck = function(req, res, next){
 Routes.prototype.init = function(){
 	var self = this;
 	
-	self.app.get('/', function (req, res) {
-		res.json({status:true});
+	self.app.get('/list', function (req, res) {
+	    console.log("----> List Users <-----")
+		self.crud.list(req, function(response){
+            res.json(response);
+        })
 	});
 
-	self.app.post('/login',function(req,res){
-        self.authentication.login(req, function(response){
+	self.app.post('/insert',function(req,res){
+        self.crud.insert(req, function(response){
             res.json(response);
         })
     });
 
-    self.app.post('/register',function(req,res){
+    /*self.app.post('/update',function(req,res){
         self.authentication.createUser(req, function(response){
             res.json(response);
         })
     });
-    self.app.get('/activeUsers',function(req,res){
+    self.app.post('/delete',function(req,res){
         self.users.activeUsers(req, function(response){
             res.json(response);
         })
-    });
-
-    self.app.post('/logout',function(req,res){
-        self.authentication.logout(req, function(response){
-            res.json(response);
-        })
-    });
+    });*/
 };
 
 

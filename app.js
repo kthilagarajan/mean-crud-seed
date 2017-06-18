@@ -14,6 +14,10 @@ var fileUpload = require('express-fileupload');
 var conf = require('./conf');
 
 /*******************************
+ * Response Object Initializaion
+ ****************************/
+ var response = require('./modules/response-adapter')
+/*******************************
  * MongoDB Initializaion
  ****************************/
 var mongoDB = require('./modules/mongo-adapter')
@@ -67,20 +71,22 @@ app.set('view engine', 'html');*/
 app.homeLayout = __dirname + "/views/layout.html"
 app.loginLayout = __dirname + "/views/login-layout.html"*/
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+/*var io = require('socket.io')(server);
 
 //Socket IO Initialization
-var SocketIO = require("./modules/socket-io-adapter")
+var SocketIO = require("./modules/socket-io-adapter")*/
 mongoClient.connect(function(dbconn){
 
     app.dbconn = dbconn;
     app.conf = conf;
-    app.socket = new SocketIO(io,app);
+    console.log(response)
+    app.resp = response;
+//    app.socket = new SocketIO(io,app);
     /*app.get('/', function (req, res) {
         res.send('hello world');
     })*/
     console.log("************************************************************");
-    console.log(new Date() + ' | Chat app Server Listening on '+ conf['web']['port']);
+    console.log(new Date() + ' | CRUD Server Listening on '+ conf['web']['port']);
     console.log("************************************************************");
 
     server.listen(conf['web']['port'], function () {

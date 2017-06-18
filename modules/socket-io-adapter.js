@@ -1,8 +1,6 @@
 var sio = require('socket.io');
 var connect = require("connect");
-var S = require('string');
-var SingleChat = require("../routes/actions/SingleChat")
-
+var S = require('string')
 var SocketIO = function (io, app) {
     this.io = io;
     this.sessionStore = app.session;
