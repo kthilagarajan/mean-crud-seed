@@ -27,6 +27,7 @@ Routes.prototype.init = function(){
 	var self = this;
 	
 	self.app.get('/list', function (req, res) {
+	    console.log(self.app.cluster.worker.id)
 		self.crud.list(req, function(response){
             res.json(response.data);
         })

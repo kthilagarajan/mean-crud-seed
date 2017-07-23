@@ -1,3 +1,19 @@
+/*Cluster*/
+// Include the cluster module
+var cluster = require('cluster');
+
+// Code to run if we're in the master process
+if (cluster.isMaster) {
+
+// Count the machine's CPUs
+var cpuCount = require('os').cpus().length;
+
+// Create a worker for each CPU
+for (var i = 0; i < cpuCount; i += 1) {
+cluster.fork();
+}
+// Code to run if we're in a worker process
+} else {
 /*******************************
  * Import Required Modules
  ****************************/
@@ -61,8 +77,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-/*
-//For Template Engine
+/*//For Template Engine
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');*/
 
@@ -81,6 +96,7 @@ mongoClient.connect(function(dbconn){
     app.dbconn = dbconn;
     app.conf = conf;
     app.resp = response;
+    app.cluster = cluster;
 //    app.socket = new SocketIO(io,app);
     /*app.get('/', function (req, res) {
         res.send('hello world');
@@ -97,3 +113,4 @@ mongoClient.connect(function(dbconn){
     var Routes = require('./routes/http-routes');
     new Routes(app);
 });
+}
